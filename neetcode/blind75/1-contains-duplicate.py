@@ -23,14 +23,27 @@ Constraints:
 -109 <= nums[i] <= 109
 """
 
+# class Solution:
+#     def containsDuplicate(self, nums):
+#         counts = {}
+#         for num in nums:
+#             if num in counts:
+#                 counts[num] += 1
+#                 if counts[num] >= 2: 
+#                     return True
+#             else: 
+#                 counts[num] = 1
+#         return False
+
+### SOLUTION USING SET
+
 class Solution:
-    def containsDuplicate(self, nums: List[int]) -> bool:
-        counts = {}
+    def containsDuplicate(self, nums):
+        num_set = set()
+
         for num in nums:
-            if num in counts:
-                counts[num] += 1
-                if counts[num] >= 2: 
-                    return True
+            if num in num_set:
+                return True
             else: 
-                counts[num] = 1
+                num_set.add(num)
         return False
