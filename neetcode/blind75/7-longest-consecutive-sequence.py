@@ -33,23 +33,39 @@ Acceptance Rate
 48.5%
 """
 
+# class Solution:
+#     def longestConsecutive(self, nums: List[int]) -> int:
+#         sorted_nums = sorted(nums)
+#         count = 1
+#         longest = 1
+
+#         if (len(sorted_nums) == 0):
+#             return 0
+
+#         for i in range(len(sorted_nums)):
+#             if i >= 1:
+#                 if (sorted_nums[i] - sorted_nums[i - 1]) == 1:
+#                     count += 1
+#                     if count >= longest:
+#                         longest = count
+#                 elif (sorted_nums[i] - sorted_nums[i - 1]) == 0:
+#                     pass
+#                 else: 
+#                     count = 1
+#         return longest
+
+"""Solution using Set"""
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        sorted_nums = sorted(nums)
-        count = 1
-        longest = 1
+        nums_set = set(nums)
+        longest = 0        
 
-        if (len(sorted_nums) == 0):
-            return 0
-
-        for i in range(len(sorted_nums)):
-            if i >= 1:
-                if (sorted_nums[i] - sorted_nums[i - 1]) == 1:
-                    count += 1
-                    if count >= longest:
-                        longest = count
-                elif (sorted_nums[i] - sorted_nums[i - 1]) == 0:
-                    pass
-                else: 
-                    count = 1
+        for num in nums_set:
+            if (num - 1) not in nums_set:
+                length = 1
+                while (num + length) in nums_set:
+                    length += 1
+                if (length >= longest):
+                    longest = length
+        
         return longest
