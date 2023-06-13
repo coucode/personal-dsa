@@ -17,7 +17,7 @@ uncompress("127y"); // ->'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 */
 
 /*
-NOT TWO POINTER ANSER
+NOT TWO POINTER ANSWER
 */
 
 // let answer = ''
@@ -50,3 +50,25 @@ NOT TWO POINTER ANSER
 //   }
 // }
 // return answer
+
+const uncompress = (s) => {
+  let left = 0;
+  let right = 0;
+  let answer = '';
+
+  while (right < s.length) {
+    let current = s[right]
+
+    if (!Number(current)) {
+      let num = Number(s.slice(left, right))
+      for (let i = 0; i < num; i++) {
+        answer = answer + current
+      }
+      left = right + 1
+      right = left + 1
+    } else {
+      right++
+    }
+  }
+  return answer
+};
