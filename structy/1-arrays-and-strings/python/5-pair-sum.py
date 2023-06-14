@@ -37,19 +37,31 @@ PSEUDOCODE:
    and set the right pointer to the left pointer + 1
 5. Return the answer
 """
-
-def pair_sum(numbers, target_sum):
-  left = 0
-  right = 1
-  answer = False
+# Two Pointer Solution
+# def pair_sum(numbers, target_sum):
+#   left = 0
+#   right = 1
+#   answer = False
   
-  while answer is False:
-    if (numbers[left] + numbers[right] == target_sum):
-      answer = (left, right)
-      return answer
-    else:
-      if (right == len(numbers) - 1):
-        left += 1
-        right = left + 1
-      else: 
-        right += 1
+#   while answer is False:
+#     if (numbers[left] + numbers[right] == target_sum):
+#       answer = (left, right)
+#       return answer
+#     else:
+#       if (right == len(numbers) - 1):
+#         left += 1
+#         right = left + 1
+#       else: 
+#         right += 1
+
+# Dictionary and Complement Solution
+def pair_sum(numbers, target_sum):
+  prev_nums = {}
+  
+  for index, num in enumerate(numbers):
+    complement = target_sum - num
+    
+    if complement in prev_nums:
+      return (index, prev_nums[complement])
+    else: 
+      prev_nums[num] = index

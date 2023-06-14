@@ -16,22 +16,36 @@ pairSum([9, 9], 18); // -> [0, 1]
 pairSum([6, 4, 2, 8 ], 12); // -> [1, 3]
 */
 
+// TWO Pointer Solution
+// const pairSum = (numbers, targetSum) => {
+//   let left = 0
+//   let right = 1
+//   let answer = false
 
+//   while (!answer) {
+//     if (numbers[left] + numbers[right] === targetSum) {
+//       return [left, right]
+//     } else {
+//       if (right === numbers.length - 1) {
+//         left += 1
+//         right = left + 1
+//       } else {
+//         right += 1
+//       }
+//     }
+//   }
+// };
+
+// Hash Map Solution
 const pairSum = (numbers, targetSum) => {
-  let left = 0
-  let right = 1
-  let answer = false
+  let prevNums = {}
 
-  while (!answer) {
-    if (numbers[left] + numbers[right] === targetSum) {
-      return [left, right]
+  for (let i = 0; i < numbers.length; i++) {
+    let complement = targetSum - numbers[i]
+    if (prevNums[complement] >= 0) {
+      return [i, prevNums[complement]]
     } else {
-      if (right === numbers.length - 1) {
-        left += 1
-        right = left + 1
-      } else {
-        right += 1
-      }
+      prevNums[numbers[i]] = i
     }
   }
 };
