@@ -15,17 +15,30 @@ pair_product([4, 7, 9, 2, 5, 1], 35) # -> (1, 4)
 pair_product([3, 2, 5, 4, 1], 10) # -> (1, 2)
 pair_product([4, 6, 8, 2], 16) # -> (2, 3)
 """
-def pair_product(numbers, target_product):
-  left = 0
-  right = 1
-  answer = False
+# TWO POINTER SOLUTION
+# def pair_product(numbers, target_product):
+#   left = 0
+#   right = 1
+#   answer = False
   
-  while answer is False:
-    if (numbers[left] * numbers[right] == target_product):
-      return (left, right)
-    else:
-      if right == len(numbers) - 1:
-        left += 1
-        right = left + 1
-      else: 
-        right += 1
+#   while answer is False:
+#     if (numbers[left] * numbers[right] == target_product):
+#       return (left, right)
+#     else:
+#       if right == len(numbers) - 1:
+#         left += 1
+#         right = left + 1
+#       else: 
+#         right += 1
+
+# Hash Map Solution
+def pair_product(numbers, target_product):
+  prev = {}
+  
+  for i, num in enumerate(numbers):
+    complement = target_product/num
+    
+    if (prev.get(complement)):
+      return (i, prev[complement])
+    else: 
+      prev[num] = i

@@ -34,22 +34,37 @@ PSEUDOCODE:
        3c-1: If right pointer is at the end of the array, increment left pointer and set right pointer one indice to the right
        3c-2: Otherwise just increment the right pointer
 */
+// TWO Pointer Solution
+// const pairProduct = (numbers, targetProduct) => {
+//   let left = 0;
+//   let right = 1;
+//   let answer = false;
 
+//   while (!answer) {
+//     if (numbers[left] * numbers[right] === targetProduct) {
+//       return [left, right]
+//     } else {
+//       if (right === numbers.length - 1) {
+//         left += 1
+//         right = left + 1
+//       } else {
+//         right += 1
+//       }
+//     }
+//   }
+// };
+
+// Hash Map Solution
 const pairProduct = (numbers, targetProduct) => {
-  let left = 0;
-  let right = 1;
-  let answer = false;
+  let prev = {}
 
-  while (!answer) {
-    if (numbers[left] * numbers[right] === targetProduct) {
-      return [left, right]
+  for (let i = 0; i < numbers.length; i++) {
+    let complement = targetProduct / numbers[i]
+
+    if (prev[complement] >= 0) {
+      return [i, prev[complement]]
     } else {
-      if (right === numbers.length - 1) {
-        left += 1
-        right = left + 1
-      } else {
-        right += 1
-      }
+      prev[numbers[i]] = i
     }
   }
 };
